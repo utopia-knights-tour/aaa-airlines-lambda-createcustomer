@@ -1,18 +1,9 @@
 package entity;
 
 public class Customer {
-	private Long customerId;
 	private String customerName;
 	private String customerAddress;
 	private String customerPhone;
-
-	public Long getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
-	}
 
 	public String getCustomerName() {
 		return customerName;

@@ -22,6 +22,7 @@ public class CreateCustomer implements RequestHandler<ApiGatewayRequest, ApiGate
 		LambdaLogger logger = context.getLogger();
 		Map<String, String> headers = new HashMap<String, String>();
 		headers.put("Access-Control-Allow-Origin", "*");
+		headers.put("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
 		try {
 			Customer customer = new Gson().fromJson(request.getBody(), Customer.class);
 			if (customer == null || customer.getCustomerName() == null || customer.getCustomerAddress() == null
@@ -32,9 +33,9 @@ public class CreateCustomer implements RequestHandler<ApiGatewayRequest, ApiGate
 			if (customerId == null) {
 				return new ApiGatewayProxyResponse(400, headers, null);
 			}
-			headers.put("Location", request.getResource().concat("/").concat(customerId.toString()));
+			headers.put("Location", request.getResource().concat("/").concat(String.valueOf(customerId)));
 			return new ApiGatewayProxyResponse(201, headers, null);
-		} catch (JsonParseException | SQLException e) {
+		} catch (SQLException e) {
 			logger.log(e.getMessage());
 			return new ApiGatewayProxyResponse(400, headers, null);
 		} catch (ClassNotFoundException e) {

@@ -15,6 +15,7 @@ public class HikariCPDataSource {
 		config.setJdbcUrl(System.getenv("AAA_DATASOURCE_URL"));
 		config.setUsername(System.getenv("AAA_DATASOURCE_USERNAME"));
 		config.setPassword(System.getenv("AAA_DATASOURCE_PASSWORD"));
+		config.setMaximumPoolSize(100);
 		config.addDataSourceProperty("cachePrepStmts", "true");
 		config.addDataSourceProperty("prepStmtCacheSize", "250");
 		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
