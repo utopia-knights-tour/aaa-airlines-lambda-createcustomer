@@ -15,20 +15,18 @@ public class HikariCPDataSource {
 		config.setJdbcUrl(System.getenv("AAA_DATASOURCE_URL"));
 		config.setUsername(System.getenv("AAA_DATASOURCE_USERNAME"));
 		config.setPassword(System.getenv("AAA_DATASOURCE_PASSWORD"));
-		config.setMaximumPoolSize(20);
-		config.setConnectionTimeout(34000);
-		config.setIdleTimeout(28740000);
-		config.setMaxLifetime(28740000);
+		config.setMaximumPoolSize(1);
+		config.setConnectionTimeout(30000);
+		config.setIdleTimeout(30000);
+		config.setMaxLifetime(30000);
+		config.setAutoCommit(false);
 		config.addDataSourceProperty("cachePrepStmts", "true");
 		config.addDataSourceProperty("prepStmtCacheSize", "250");
 		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-		config.setAutoCommit(false);
 		ds = new HikariDataSource(config);
 	}
 
 	public static Connection getConnection() throws SQLException {
-		Connection connection = ds.getConnection();
-		connection.setAutoCommit(false);
-		return connection;
+		return ds.getConnection();
 	}
 }
